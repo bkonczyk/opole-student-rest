@@ -1,4 +1,4 @@
-package pl.sda.spring.students.domain.student;
+package pl.sda.spring.students.domain.course;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

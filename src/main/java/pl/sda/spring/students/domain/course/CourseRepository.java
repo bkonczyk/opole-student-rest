@@ -1,4 +1,4 @@
-package pl.sda.spring.students.domain.student;
+package pl.sda.spring.students.domain.course;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
