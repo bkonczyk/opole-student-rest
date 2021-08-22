@@ -9,7 +9,7 @@ import pl.sda.spring.students.domain.student.Student;
 import pl.sda.spring.students.domain.student.StudentRepository;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -25,14 +25,14 @@ public class MockDataStudents {
                 "Andrzej",
                 "Gołota",
                 Sex.M,
-                List.of(new Course(null, "Boks"))));
+                Set.of(new Course(null, "Boks"))));
 
         studentRepository.save(new Student(
                 null,
                 "Adam",
                 "Małysz",
                 Sex.M,
-                List.of(new Course(null, "Skoki"))
+                Set.of(new Course(null, "Skoki"))
         ));
     }
 }

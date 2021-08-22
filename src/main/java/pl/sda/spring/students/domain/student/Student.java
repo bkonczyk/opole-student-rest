@@ -8,7 +8,9 @@ import pl.sda.spring.students.domain.course.Course;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -26,5 +28,5 @@ public class Student {
     private Sex sex;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Course> courses = new ArrayList<>();
+    private Set<Course> courses = new HashSet<>();
 }

@@ -5,8 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @RequiredArgsConstructor
 @Service
 public class StudentService {
@@ -15,7 +13,11 @@ public class StudentService {
 
     public void addStudent(StudentRequest request) {
         Student student = mapRequestToStudent(request);
-        repository.save(student);
+        save(student);
+    }
+
+    public Student save(Student student) {
+        return repository.save(student);
     }
 
     private Student mapRequestToStudent(StudentRequest request) {
@@ -37,7 +39,21 @@ public class StudentService {
                 student.getId(),
                 student.getName(),
                 student.getLastName(),
+                student.getSex());
+    }
+
+    public StudentView getStudentView(Long id) {
+        Student student = getStudent(id);
+        StudentView studentView = StudentView.of(
+                student.getId(),
+                student.getName(),
+                student.getLastName(),
                 student.getSex(),
                 student.getCourses());
+        return studentView;
+    }
+
+    public Student getStudent(Long id) {
+        return repository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
     }
 }
