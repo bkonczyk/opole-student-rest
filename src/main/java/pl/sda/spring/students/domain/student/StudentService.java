@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import static pl.sda.spring.students.domain.student.StudentMapper.*;
+
 @RequiredArgsConstructor
 @Service
 public class StudentService {
@@ -20,36 +22,15 @@ public class StudentService {
         return repository.save(student);
     }
 
-    private Student mapRequestToStudent(StudentRequest request) {
-        return Student.builder()
-                .name(request.getName())
-                .lastName(request.getLastName())
-                .sex(request.getSex())
-                .build();
-    }
-
     public Page<StudentListView> getPageOfStudents(Integer page, Integer size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<Student> studentsPage = repository.findAll(pageRequest);
         return studentsPage.map(student -> mapToStudentListView(student));
     }
 
-    private StudentListView mapToStudentListView(Student student) {
-        return StudentListView.of(
-                student.getId(),
-                student.getName(),
-                student.getLastName(),
-                student.getSex());
-    }
-
     public StudentView getStudentView(Long id) {
         Student student = getStudent(id);
-        StudentView studentView = StudentView.of(
-                student.getId(),
-                student.getName(),
-                student.getLastName(),
-                student.getSex(),
-                student.getCourses());
+        StudentView studentView = mapToStudentView(student);
         return studentView;
     }
 

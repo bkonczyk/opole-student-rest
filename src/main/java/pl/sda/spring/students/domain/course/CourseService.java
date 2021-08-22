@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.sda.spring.students.domain.student.Student;
 import pl.sda.spring.students.domain.student.StudentService;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class CourseService {
@@ -16,6 +18,7 @@ public class CourseService {
         courseRepository.save(course);
     }
 
+    @Transactional // handles entity and saves it
     public void addToStudent(Course request, Long studentId) {
         Student student = studentService.getStudent(studentId);
         boolean courseAlreadyTaken = student.getCourses()
@@ -26,6 +29,5 @@ public class CourseService {
             throw new RuntimeException("Student with id: " + studentId + " has already taken the course");
         }
         student.getCourses().add(request);
-        studentService.save(student);
     }
 }
