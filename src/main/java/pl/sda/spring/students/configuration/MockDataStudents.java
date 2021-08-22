@@ -1,6 +1,7 @@
 package pl.sda.spring.students.configuration;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import pl.sda.spring.students.domain.course.Course;
 import pl.sda.spring.students.domain.student.Sex;
@@ -8,10 +9,11 @@ import pl.sda.spring.students.domain.student.Student;
 import pl.sda.spring.students.domain.student.StudentRepository;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Profile("dev")
 public class MockDataStudents {
 
     private final StudentRepository studentRepository;
@@ -23,14 +25,14 @@ public class MockDataStudents {
                 "Andrzej",
                 "Gołota",
                 Sex.M,
-                new ArrayList<Course>()));
+                List.of(new Course(null, "Boks"))));
+
         studentRepository.save(new Student(
                 null,
                 "Adam",
                 "Małysz",
                 Sex.M,
-                new ArrayList<Course>()
+                List.of(new Course(null, "Skoki"))
         ));
-
     }
 }

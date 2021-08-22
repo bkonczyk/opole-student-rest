@@ -1,6 +1,7 @@
 package pl.sda.spring.students.domain.student;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.sda.spring.students.domain.course.Course;
@@ -14,15 +15,16 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Table(name = "students")
+@Builder
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String lastName;
     private Sex sex;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Course> courses = new ArrayList<>();
 }
