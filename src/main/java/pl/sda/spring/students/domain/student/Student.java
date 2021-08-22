@@ -18,7 +18,7 @@ public class Student {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     private String lastName;
     private Sex sex;
