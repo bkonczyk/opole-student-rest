@@ -1,4 +1,4 @@
-package pl.sda.spring.student;
+package pl.sda.spring.students;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
